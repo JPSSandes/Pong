@@ -5,10 +5,10 @@ namespace Pong
 {
     class Program
     {
-        static int windowWidth = 800;
-        static int windowHeight = 480;
+        static int windowWidth = (int)WindowSizes.windowWidth;
+        static int windowHeight = (int)WindowSizes.windowHeight;
 
-        static FirstScreen firstScreen = new FirstScreen(windowWidth, windowHeight);
+        static FirstScreen firstScreen = new FirstScreen();
 
         public static void Main(string[] args)
         {

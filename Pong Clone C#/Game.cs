@@ -1,21 +1,27 @@
 using Raylib_cs;
 
-public class Game (int width, int height)
+public class Game
 {
+    // constants //
+    const int windowWidth = (int) WindowSizes.windowWidth;      // defines game window's width
+    const int windowHeight = (int) WindowSizes.windowHeight;    // defines game window's height
+
     // variables //
     
     // integers
-    int racketWidth = width / 40;   // Defines a racket's thickness
-    int racketHeight = height / 4;  // Defines a racket's height
+    int racketWidth = windowWidth / 40;   // Defines a racket's thickness
+    static int racketHeight = windowHeight / 4;  // Defines a racket's height
     int playerOneScore = 0;         // How many points Player One got
     int playerTwoScore = 0;         // How many points Player Two got
     int speed = 5;                  // Movement Speed
 
     // doubles
-    double playerOneY = height * 0.4;   // Variable used to move left racket
-    double playerTwoY = height * 0.4;   // Variable used to move right racket
-    double ballX = width / 2;           // Variable used to move ball in X axis
-    double ballY = height / 2;          // variable used to move ball in Y axis
+    static double playerOneY = windowHeight * 0.4;   // Variable used to move left racket
+    static double playerTwoY = windowHeight * 0.4;   // Variable used to move right racket
+    double ballX = windowWidth / 2;           // Variable used to move ball in X axis
+    double ballY = windowWidth * 0.33;          // Variable used to move ball in Y axis
+    double playerOneCollision = racketHeight % Math.Round(playerOneY);  // Variable used for coliding the ball with player one
+    double playerTwoCollision = racketHeight % Math.Round(playerTwoY);  // Variable used for coliding the ball with player two
 
     // booleans
     bool ballIsGoingUp = true;      // Variable used to move ball up and down
@@ -43,24 +49,23 @@ public class Game (int width, int height)
     private void DrawPlayerOne()
     {
         MovePlayerOne();
-        Raylib.DrawRectangle((int)(width * 0.02), (int) playerOneY, racketWidth, racketHeight, Color.DarkBlue);
+        Raylib.DrawRectangle((int)(windowWidth * 0.02), (int) playerOneY, racketWidth, racketHeight, Color.DarkBlue);
     }
 
     /*
         Exclusive for Player Two
         Uses Up and Down arrows to move right racket.
     */
+    private void DrawPlayerTwo()
+    {
+        MovePlayerTwo();
+        Raylib.DrawRectangle((int)(windowWidth * 0.95), (int) playerTwoY, racketWidth, racketHeight, Color.Red);
+    }
 
     /*
         Exclusive for the ball
         It moves kinda like the DVD logo on screen
     */
-    private void DrawPlayerTwo()
-    {
-        MovePlayerTwo();
-        Raylib.DrawRectangle((int)(width * 0.95), (int) playerTwoY, racketWidth, racketHeight, Color.Red);
-    }
-
     private void DrawBall()
     {
         Raylib.DrawCircle((int) ballX, (int) ballY, 10, Color.Black);
@@ -121,7 +126,7 @@ public class Game (int width, int height)
         {
             playerOneY += speed;
         }
-        else if (playerOneY > height - racketHeight)
+        else if (playerOneY > windowHeight - racketHeight)
         {
             playerOneY -= speed;
         }
@@ -138,7 +143,7 @@ public class Game (int width, int height)
         {
             playerTwoY += speed;
         }
-        else if (playerTwoY > height - racketHeight)
+        else if (playerTwoY > windowHeight - racketHeight)
         {
             playerTwoY -= speed;
         }

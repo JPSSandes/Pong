@@ -1,8 +1,8 @@
 using Raylib_cs;
 
-public class FirstScreen (int width, int height)
+public class FirstScreen
 {
-    Game game = new Game(width, height);
+    Game game = new Game();
     bool isGameRunning = false;
 
         public void DrawFirstScreen()
@@ -20,8 +20,8 @@ public class FirstScreen (int width, int height)
 
     private void Text()
     {
-        Raylib.DrawText("Pong C#", (int) (width * 0.23), (int) (height * 0.25), 100, Color.Black);
-        Raylib.DrawText("Press \"Space\" to Start Playing", (int) (width * 0.30), (int) (height * 0.5), 20, Color.Black);
+        Raylib.DrawText("Pong C#", (int) ((int)WindowSizes.windowWidth * 0.23), (int) ((int)WindowSizes.windowHeight * 0.25), 100, Color.Black);
+        Raylib.DrawText("Press \"Space\" to Start Playing", (int)((int)WindowSizes.windowWidth * 0.33), (int)WindowSizes.windowHeight / 2, 20, Color.Black);
     }
 
     private void RunGame()
