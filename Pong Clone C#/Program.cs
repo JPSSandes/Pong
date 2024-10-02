@@ -8,6 +8,8 @@ namespace Pong
         static int windowWidth = 800;
         static int windowHeight = 480;
 
+        static FirstScreen firstScreen = new FirstScreen(windowWidth, windowHeight);
+
         public static void Main(string[] args)
         {
             Raylib.InitWindow(windowWidth, windowHeight, "Pong Clone C#: Remastered");
@@ -15,6 +17,9 @@ namespace Pong
             while (!Raylib.WindowShouldClose())
             {
                 Raylib.BeginDrawing();
+                Raylib.ClearBackground(Color.White);
+
+                firstScreen.DrawFirstScreen();
 
                 Raylib.EndDrawing();
             }
