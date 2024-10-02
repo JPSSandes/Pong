@@ -13,6 +13,7 @@ namespace Pong
         public static void Main(string[] args)
         {
             Raylib.InitWindow(windowWidth, windowHeight, "Pong Clone C#: Remastered");
+            Raylib.SetTargetFPS(60);
 
             while (!Raylib.WindowShouldClose())
             {
