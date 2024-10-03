@@ -20,8 +20,8 @@ public class Game
     static double playerTwoY = windowHeight * 0.4;   // Variable used to move right racket
     double ballX = windowWidth / 2;           // Variable used to move ball in X axis
     double ballY = windowWidth * 0.33;          // Variable used to move ball in Y axis
-    double playerOneCollision = racketHeight % Math.Round(playerOneY);  // Variable used for coliding the ball with player one
-    double playerTwoCollision = racketHeight % Math.Round(playerTwoY);  // Variable used for coliding the ball with player two
+    static double playerOneCollision = racketHeight % Math.Round(playerOneY);  // Variable used for coliding the ball with player one
+    static double playerTwoCollision = racketHeight % Math.Round(playerTwoY);  // Variable used for coliding the ball with player two
 
     // booleans
     bool ballIsGoingUp = true;      // Variable used to move ball up and down
@@ -35,9 +35,7 @@ public class Game
     */
     public void DrawGame()
     {
-        DrawPlayerOne();
-        DrawPlayerTwo();
-        DrawBall();
+        GameOver();
     }
 
     // Methods 2 - Drawing Shapes //
@@ -68,7 +66,16 @@ public class Game
     */
     private void DrawBall()
     {
+        MoveBallX();
+        MoveBallY();
         Raylib.DrawCircle((int) ballX, (int) ballY, 10, Color.Black);
+    }
+
+    private void DrawScore()
+    {
+        Raylib.DrawText($"{playerOneScore}", (windowWidth / 2) - 20, 10, 20, Color.DarkBlue);
+        Raylib.DrawText("|", windowWidth / 2, 10, 20, Color.Black);
+        Raylib.DrawText($"{playerTwoScore}", (windowWidth / 2) + 10, 10, 20, Color.Red);
     }
 
     // Methods 3 - Basic Movement
@@ -104,6 +111,38 @@ public class Game
         {
             playerTwoY += speed;
         }
+    }
+
+    private void MoveBallX()
+    {
+        BallXLimit();
+        if (ballIsGoingRight)
+        {
+            ballX += speed * 0.75;
+        }
+        else
+        {
+            ballX -= speed * 0.75;
+        }
+    }
+
+    private void MoveBallY()
+    {
+        BallYLimit();
+        if (ballIsGoingUp)
+        {
+            ballY -= speed * 0.75;
+        }
+        else
+        {
+            ballY += speed * 0.75;
+        }
+    }
+
+    private void ResetBallPosition()
+    {
+        ballX = windowWidth / 2;
+        ballY = windowHeight / 3;
     }
 
     // Methods 4 - Limits
@@ -146,6 +185,69 @@ public class Game
         else if (playerTwoY > windowHeight - racketHeight)
         {
             playerTwoY -= speed;
+        }
+    }
+
+    private void BallYLimit()
+    {
+        if (ballY < 0 || ballY > windowHeight)
+        {
+            ballIsGoingUp = !ballIsGoingUp;
+        }
+    }
+
+    private void BallXLimit()
+    {
+        if (ballX <= racketWidth)
+        {
+            playerOneScore++;
+            ResetBallPosition();
+        }
+        else if (ballX >= windowWidth - racketWidth)
+        {
+            playerTwoScore++;
+            ResetBallPosition();
+        }
+    }
+
+    private void PlayerVersusBall()
+    {
+        if (ballX <= windowWidth * 0.05)
+        {
+            if (!(ballY <= playerOneY || ballY >= playerOneY + playerOneCollision))
+            {
+                ballIsGoingRight = true;
+            }
+        }
+        else if (ballX >= windowWidth * 0.95)
+        {
+            if (!(ballY <= playerTwoY || ballY >= playerTwoY + playerTwoCollision))
+            {
+                ballIsGoingRight = false;
+            }
+        }
+    }
+
+    private void GameOver()
+    {
+        if (playerOneScore < 10 && playerTwoScore < 10)
+        {
+            DrawPlayerOne();
+            DrawPlayerTwo();
+            DrawBall();
+            DrawScore();
+            PlayerVersusBall();
+        }
+        else
+        {
+            if (playerOneScore >= 10)
+            {
+                Raylib.DrawText("Player 2 Wins!", windowWidth / 2 - 75, windowHeight / 2, 20, Color.Red);
+            }
+            else if (playerTwoScore >= 10)
+            {
+                Raylib.DrawText("Player 1 Wins!", windowWidth / 2 - 75, windowHeight / 2, 20, Color.DarkBlue);
+            }
         }
     }
 }
