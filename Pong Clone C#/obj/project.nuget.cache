@@ -1,11 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "2FVOvmL5j0E=",
+  "dgSpecHash": "0tnZi5//Gikf4DCM7hxK9BBdgQMfYwfjNoWeZqYv2LO5t3r4JTtFdugK8bEsYylvIXh5fV2uq+41rYsKfx/Rxg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\MRKN\\Documents\\Programação\\Vs Code\\C#\\Pong\\Pong\\Pong Clone C#\\Pong Clone C#.csproj",
+  "projectFilePath": "/home/kitsunehearts/Programação/VsCode/C#/Pong Clone/Pong/Pong Clone C#/Pong Clone C#.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\MRKN\\.nuget\\packages\\raylib-cs\\6.1.1\\raylib-cs.6.1.1.nupkg.sha512",
-    "C:\\Users\\MRKN\\.nuget\\packages\\system.numerics.vectors\\4.5.0\\system.numerics.vectors.4.5.0.nupkg.sha512"
+    "/home/kitsunehearts/.nuget/packages/raylib-cs/6.1.1/raylib-cs.6.1.1.nupkg.sha512",
+    "/home/kitsunehearts/.nuget/packages/system.numerics.vectors/4.5.0/system.numerics.vectors.4.5.0.nupkg.sha512"
   ],
   "logs": []
 }

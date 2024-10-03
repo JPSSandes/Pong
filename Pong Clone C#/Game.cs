@@ -200,12 +200,12 @@ public class Game
     {
         if (ballX <= racketWidth)
         {
-            playerOneScore++;
+            playerTwoScore++;
             ResetBallPosition();
         }
         else if (ballX >= windowWidth - racketWidth)
         {
-            playerTwoScore++;
+            playerOneScore++;
             ResetBallPosition();
         }
     }
@@ -240,11 +240,11 @@ public class Game
         }
         else
         {
-            if (playerOneScore >= 10)
+            if (playerTwoScore >= 10)
             {
                 Raylib.DrawText("Player 2 Wins!", windowWidth / 2 - 75, windowHeight / 2, 20, Color.Red);
             }
-            else if (playerTwoScore >= 10)
+            else if (playerOneScore >= 10)
             {
                 Raylib.DrawText("Player 1 Wins!", windowWidth / 2 - 75, windowHeight / 2, 20, Color.DarkBlue);
             }
